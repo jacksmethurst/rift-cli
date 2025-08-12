@@ -18,7 +18,17 @@ jobs:
       uses: actions/setup-go@v4
       with:
         go-version: '1.21'
+        
+    - name: Setup Node.js for version script
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
     
+    - name: Update version numbers
+      run: |
+        VERSION=${GITHUB_REF#refs/tags/v}
+        node scripts/update-version.js $VERSION
+        
     - name: Build binaries
       run: |
         # Build for multiple platforms
