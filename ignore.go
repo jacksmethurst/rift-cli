@@ -98,9 +98,7 @@ func (ic *IgnoreChecker) ShouldIgnore(path string) bool {
 	normalizedPath := filepath.ToSlash(path)
 	
 	// Remove leading ./
-	if strings.HasPrefix(normalizedPath, "./") {
-		normalizedPath = normalizedPath[2:]
-	}
+	normalizedPath = strings.TrimPrefix(normalizedPath, "./")
 	
 	for _, regex := range ic.regexps {
 		if regex.MatchString(normalizedPath) {
