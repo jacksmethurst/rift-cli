@@ -63,7 +63,7 @@ jobs:
         cat > Formula/cli.rb << EOF
         class Cli < Formula
           desc "A Git alternative written in Go"
-          homepage "https://github.com/New-Genre/rift-cli"
+          homepage "https://github.com/jacksmethurst/rift-cli"
           version "$VERSION"
 
           on_macos do
