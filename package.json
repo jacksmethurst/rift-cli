@@ -1,0 +1,32 @@
+{
+  "name": "@jacksmethurst/rift-cli",
+  "version": "1.0.2",
+  "description": "A Git alternative written in Go",
+  "main": "bin/rift",
+  "bin": {
+    "rift": "bin/rift"
+  },
+  "scripts": {
+    "postinstall": "node scripts/install.js"
+  },
+  "keywords": ["git", "version-control", "cli", "golang"],
+  "author": "Jack Smethurst",
+  "license": "MIT",
+  "homepage": "https://github.com/jacksmethurst/rift-cli",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jacksmethurst/rift-cli.git"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "tar": "^6.2.0"
+  },
+  "os": ["darwin", "linux", "win32"],
+  "files": [
+    "bin/",
+    "scripts/",
+    "README.md"
+  ]
+}

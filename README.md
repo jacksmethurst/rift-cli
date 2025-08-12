@@ -13,11 +13,10 @@ A Git alternative written in Go. Rift provides version control functionality wit
 
 ## Installation
 
-### macOS (Homebrew):
+Install Node.js 18+, then run:
 
 ```bash
-brew tap jacksmethurst/rift-cli
-brew install rift
+npm install -g @jacksmethurst/rift-cli
 ```
 
 ### Manual Installation:
