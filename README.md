@@ -16,7 +16,7 @@ A Git alternative written in Go. Rift provides version control functionality wit
 Install Node.js 18+, then run:
 
 ```bash
-npm install -g @jacksmethurst/rift-cli
+npm install -g rift-cli
 ```
 
 ### Manual Installation:

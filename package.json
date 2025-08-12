@@ -1,6 +1,6 @@
 {
-  "name": "@jacksmethurst/rift-cli",
-  "version": "1.0.2",
+  "name": "rift-cli",
+  "version": "1.0.3",
   "description": "A Git alternative written in Go",
   "main": "bin/rift",
   "bin": {

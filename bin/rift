@@ -1,0 +1,4 @@
+#!/bin/bash
+# This is a placeholder that gets replaced during postinstall
+echo "Installing rift binary..."
+node $(dirname "$0")/../scripts/install.js
