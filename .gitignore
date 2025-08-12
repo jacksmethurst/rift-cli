@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+
+# Go build artifacts
+rift
+rift.exe
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db

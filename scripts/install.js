@@ -69,28 +69,43 @@ async function downloadBinary() {
           });
         } else {
           // Handle tar.gz for Unix systems
-          streamPipeline(
-            res,
-            zlib.createGunzip(),
-            tar.extract({
+          // Save to temp file first, then extract
+          const tempFile = path.join(binDir, 'temp.tar.gz');
+          const writeStream = fs.createWriteStream(tempFile);
+          
+          streamPipeline(res, writeStream).then(() => {
+            // Extract the tar.gz file
+            return tar.extract({
+              file: tempFile,
               cwd: binDir,
-              strip: 0,
               filter: (path, entry) => {
                 return path.includes('rift-');
-              },
-              map: (header) => {
-                if (header.name.includes('rift-')) {
-                  header.name = 'rift';
-                }
-                return header;
               }
-            })
-          ).then(() => {
-            // Make executable
-            const binaryPath = path.join(binDir, 'rift');
-            if (fs.existsSync(binaryPath)) {
-              fs.chmodSync(binaryPath, '755');
+            });
+          }).then(() => {
+            // Find the extracted binary and rename it
+            const files = fs.readdirSync(binDir);
+            const binaryFile = files.find(f => f.startsWith('rift-') && !f.endsWith('.tar.gz'));
+            
+            if (binaryFile) {
+              const oldPath = path.join(binDir, binaryFile);
+              const newPath = path.join(binDir, 'rift');
+              
+              // Remove placeholder if it exists
+              if (fs.existsSync(newPath)) {
+                fs.unlinkSync(newPath);
+              }
+              
+              // Move and make executable
+              fs.renameSync(oldPath, newPath);
+              fs.chmodSync(newPath, '755');
             }
+            
+            // Clean up temp file
+            if (fs.existsSync(tempFile)) {
+              fs.unlinkSync(tempFile);
+            }
+            
             resolve();
           }).catch(reject);
         }
