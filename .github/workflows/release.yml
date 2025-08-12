@@ -1,0 +1,47 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
+    
+    - name: Build binaries
+      run: |
+        # Build for multiple platforms
+        GOOS=linux GOARCH=amd64 go build -o rift-linux-amd64 .
+        GOOS=linux GOARCH=arm64 go build -o rift-linux-arm64 .
+        GOOS=darwin GOARCH=amd64 go build -o rift-darwin-amd64 .
+        GOOS=darwin GOARCH=arm64 go build -o rift-darwin-arm64 .
+        GOOS=windows GOARCH=amd64 go build -o rift-windows-amd64.exe .
+        
+        # Create archives
+        tar -czf rift-linux-amd64.tar.gz rift-linux-amd64
+        tar -czf rift-linux-arm64.tar.gz rift-linux-arm64
+        tar -czf rift-darwin-amd64.tar.gz rift-darwin-amd64
+        tar -czf rift-darwin-arm64.tar.gz rift-darwin-arm64
+        zip rift-windows-amd64.zip rift-windows-amd64.exe
+    
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          rift-linux-amd64.tar.gz
+          rift-linux-arm64.tar.gz
+          rift-darwin-amd64.tar.gz
+          rift-darwin-arm64.tar.gz
+          rift-windows-amd64.zip
+        generate_release_notes: true

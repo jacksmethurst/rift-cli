@@ -42,6 +42,8 @@ func main() {
 		push()
 	case "pull":
 		pull()
+	case "version", "--version", "-v":
+		printVersion()
 	default:
 		fmt.Printf("Unknown command: %s\n", command)
 		printUsage()
@@ -62,6 +64,7 @@ func printUsage() {
 	fmt.Println("  clone <url>   Clone a repository")
 	fmt.Println("  push          Push changes to remote")
 	fmt.Println("  pull          Pull changes from remote")
+	fmt.Println("  version       Show version information")
 }
 
 func initRepo() {
@@ -132,4 +135,10 @@ func push() {
 func pull() {
 	fmt.Println("Pulling changes...")
 	// TODO: Implement pull functionality
+}
+
+func printVersion() {
+	fmt.Println("Rift CLI v1.0.0")
+	fmt.Println("A Git alternative written in Go")
+	fmt.Println("https://github.com/New-Genre/rift-cli")
 }
