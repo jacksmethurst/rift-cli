@@ -16,7 +16,8 @@ A Git alternative written in Go. Rift provides version control functionality wit
 ### macOS (Homebrew):
 
 ```bash
-brew install https://raw.githubusercontent.com/jacksmethurst/rift-cli/main/Formula/cli.rb
+brew tap jacksmethurst/rift-cli
+brew install cli
 ```
 
 ### Manual Installation:
