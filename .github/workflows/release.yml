@@ -64,8 +64,8 @@ jobs:
         cd homebrew-rift-cli
         
         # Update formula
-        cat > Formula/cli.rb << EOF
-        class Cli < Formula
+        cat > Formula/rift.rb << EOF
+        class Rift < Formula
           desc "A Git alternative written in Go"
           homepage "https://github.com/jacksmethurst/rift-cli"
           version "$VERSION"
@@ -95,6 +95,6 @@ jobs:
         # Commit and push to homebrew tap
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
-        git add Formula/cli.rb
-        git commit -m "Update cli formula to v$VERSION"
+        git add Formula/rift.rb
+        git commit -m "Update rift formula to v$VERSION"
         git push origin main

@@ -17,7 +17,7 @@ A Git alternative written in Go. Rift provides version control functionality wit
 
 ```bash
 brew tap jacksmethurst/rift-cli
-brew install cli
+brew install rift
 ```
 
 ### Manual Installation:

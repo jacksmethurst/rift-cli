@@ -1,4 +1,4 @@
-class Cli < Formula
+class Rift < Formula
   desc "A Git alternative written in Go"
   homepage "https://github.com/jacksmethurst/rift-cli"
   version "1.0.0"
