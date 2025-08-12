@@ -140,5 +140,5 @@ func pull() {
 func printVersion() {
 	fmt.Println("Rift CLI v1.0.0")
 	fmt.Println("A Git alternative written in Go")
-	fmt.Println("https://github.com/New-Genre/rift-cli")
+	fmt.Println("https://github.com/jacksmethurst/rift-cli")
 }

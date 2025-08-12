@@ -1,3 +1,3 @@
-module github.com/New-Genre/rift-cli
+module github.com/jacksmethurst/rift-cli
 
 go 1.24.6

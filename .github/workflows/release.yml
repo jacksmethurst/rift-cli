@@ -52,7 +52,7 @@ jobs:
         generate_release_notes: true
         
     - name: Update Homebrew Formula
-      if: github.repository == 'New-Genre/rift-cli'
+      if: github.repository == 'jacksmethurst/rift-cli'
       run: |
         # Get SHA256 hashes for macOS binaries
         DARWIN_AMD64_SHA=$(sha256sum rift-darwin-amd64.tar.gz | cut -d' ' -f1)
@@ -68,11 +68,11 @@ jobs:
 
           on_macos do
             if Hardware::CPU.intel?
-              url "https://github.com/New-Genre/rift-cli/releases/download/v$VERSION/rift-darwin-amd64.tar.gz"
+              url "https://github.com/jacksmethurst/rift-cli/releases/download/v$VERSION/rift-darwin-amd64.tar.gz"
               sha256 "$DARWIN_AMD64_SHA"
             end
             if Hardware::CPU.arm?
-              url "https://github.com/New-Genre/rift-cli/releases/download/v$VERSION/rift-darwin-arm64.tar.gz"
+              url "https://github.com/jacksmethurst/rift-cli/releases/download/v$VERSION/rift-darwin-arm64.tar.gz"
               sha256 "$DARWIN_ARM64_SHA"
             end
           end

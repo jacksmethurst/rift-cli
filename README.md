@@ -16,12 +16,12 @@ A Git alternative written in Go. Rift provides version control functionality wit
 ### macOS (Homebrew):
 
 ```bash
-brew install New-Genre/rift-cli/cli
+brew install jacksmethurst/rift-cli/cli
 ```
 
 ### Manual Installation:
 
-Download the binary for your platform from [Releases](https://github.com/New-Genre/rift-cli/releases) and add to your PATH.
+Download the binary for your platform from [Releases](https://github.com/jacksmethurst/rift-cli/releases) and add to your PATH.
 
 ## Usage
 
