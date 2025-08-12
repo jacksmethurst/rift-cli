@@ -34,6 +34,10 @@ jobs:
         tar -czf rift-darwin-amd64.tar.gz rift-darwin-amd64
         tar -czf rift-darwin-arm64.tar.gz rift-darwin-arm64
         zip rift-windows-amd64.zip rift-windows-amd64.exe
+        
+        # Calculate SHA256 hashes
+        echo "## SHA256 Checksums" >> checksums.txt
+        sha256sum rift-*.tar.gz rift-*.zip >> checksums.txt
     
     - name: Create Release
       uses: softprops/action-gh-release@v1
@@ -44,4 +48,49 @@ jobs:
           rift-darwin-amd64.tar.gz
           rift-darwin-arm64.tar.gz
           rift-windows-amd64.zip
+          checksums.txt
         generate_release_notes: true
+        
+    - name: Update Homebrew Formula
+      if: github.repository == 'New-Genre/rift-cli'
+      run: |
+        # Get SHA256 hashes for macOS binaries
+        DARWIN_AMD64_SHA=$(sha256sum rift-darwin-amd64.tar.gz | cut -d' ' -f1)
+        DARWIN_ARM64_SHA=$(sha256sum rift-darwin-arm64.tar.gz | cut -d' ' -f1)
+        VERSION=${GITHUB_REF#refs/tags/v}
+        
+        # Update formula in same repository
+        cat > Formula/cli.rb << EOF
+        class Cli < Formula
+          desc "A Git alternative written in Go"
+          homepage "https://github.com/New-Genre/rift-cli"
+          version "$VERSION"
+
+          on_macos do
+            if Hardware::CPU.intel?
+              url "https://github.com/New-Genre/rift-cli/releases/download/v$VERSION/rift-darwin-amd64.tar.gz"
+              sha256 "$DARWIN_AMD64_SHA"
+            end
+            if Hardware::CPU.arm?
+              url "https://github.com/New-Genre/rift-cli/releases/download/v$VERSION/rift-darwin-arm64.tar.gz"
+              sha256 "$DARWIN_ARM64_SHA"
+            end
+          end
+
+          def install
+            bin.install "rift-darwin-amd64" => "rift" if Hardware::CPU.intel?
+            bin.install "rift-darwin-arm64" => "rift" if Hardware::CPU.arm?
+          end
+
+          test do
+            system "#{bin}/rift", "version"
+          end
+        end
+        EOF
+        
+        # Commit and push formula update
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git add Formula/cli.rb
+        git commit -m "Update cli formula to v$VERSION" || echo "No changes to commit"
+        git push origin HEAD:main || echo "No changes to push"

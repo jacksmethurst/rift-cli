@@ -13,23 +13,15 @@ A Git alternative written in Go. Rift provides version control functionality wit
 
 ## Installation
 
-### Install from source (requires Go):
+### macOS (Homebrew):
 
 ```bash
-go install github.com/New-Genre/rift-cli@latest
+brew install New-Genre/rift-cli/cli
 ```
 
-### Manual installation:
+### Manual Installation:
 
-1. Download the binary for your platform from [Releases](https://github.com/New-Genre/rift-cli/releases)
-2. Move it to a directory in your PATH:
-   ```bash
-   # macOS/Linux
-   sudo mv rift /usr/local/bin/
-   
-   # Windows
-   # Move rift.exe to a directory in your PATH
-   ```
+Download the binary for your platform from [Releases](https://github.com/New-Genre/rift-cli/releases) and add to your PATH.
 
 ## Usage
 
