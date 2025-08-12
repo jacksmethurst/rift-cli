@@ -11,7 +11,7 @@ const tar = require('tar');
 const streamPipeline = promisify(pipeline);
 
 const REPO = 'jacksmethurst/rift-cli';
-const VERSION = require('../package.json').version;
+const VERSION = '1.0.6';
 
 function getPlatform() {
   const platform = process.platform;

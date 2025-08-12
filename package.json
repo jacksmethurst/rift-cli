@@ -1,6 +1,6 @@
 {
   "name": "rift-cli",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A Git alternative written in Go",
   "main": "bin/rift",
   "bin": {
@@ -10,9 +10,15 @@
     "postinstall": "node scripts/install.js",
     "version:update": "node scripts/update-version.js",
     "build": "go build -o rift .",
-    "build:all": "GOOS=linux GOARCH=amd64 go build -o rift-linux-amd64 . && GOOS=darwin GOARCH=amd64 go build -o rift-darwin-amd64 . && GOOS=darwin GOARCH=arm64 go build -o rift-darwin-arm64 ."
+    "build:all": "GOOS=linux GOARCH=amd64 go build -o rift-linux-amd64 . && GOOS=darwin GOARCH=amd64 go build -o rift-darwin-amd64 . && GOOS=darwin GOARCH=arm64 go build -o rift-darwin-arm64 .",
+    "release": "./scripts/release.sh"
   },
-  "keywords": ["git", "version-control", "cli", "golang"],
+  "keywords": [
+    "git",
+    "version-control",
+    "cli",
+    "golang"
+  ],
   "author": "Jack Smethurst",
   "license": "MIT",
   "homepage": "https://github.com/jacksmethurst/rift-cli",
@@ -26,7 +32,11 @@
   "dependencies": {
     "tar": "^6.2.0"
   },
-  "os": ["darwin", "linux", "win32"],
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ],
   "files": [
     "bin/",
     "scripts/",
